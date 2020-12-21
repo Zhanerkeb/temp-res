@@ -14,13 +14,14 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-function Signup(props) {
+function Signin(props) {
+    console.log(props)
     const onFinish = values => {
         console.log('Success:', values);
-        props.authActions.signup(values);
+        props.authActions.signin(values);
         props.history.push('/profile');
     };
-  
+    
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo);
     };
@@ -34,13 +35,6 @@ function Signup(props) {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item
-            label="Username"
-            name="name"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-          >
-            <Input />
-          </Form.Item>
           <Form.Item
             label="Email"
             name="email"
@@ -60,7 +54,7 @@ function Signup(props) {
           <Form.Item {...tailLayout} name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <Link to='/signin'>Already have an account?</Link>
+        
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               Submit
@@ -74,12 +68,10 @@ function Signup(props) {
 
 const mapStateToProps = state => ({
     isLoading: state.auth.isLoading,
-    isAuth: state.auth.isAuth,
-    user: state.auth.user
 })
 
 const mapDispathToProps = dispatch => ({
     authActions: bindActionCreators(authActions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispathToProps)(withRouter(Signup));
+export default connect(mapStateToProps, mapDispathToProps)(withRouter(Signin));
